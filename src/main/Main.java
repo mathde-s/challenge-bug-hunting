@@ -1,11 +1,11 @@
 package main;
 
 import model.Video;
-import repository.FileVideoRepository;
+import repository.VideoRepositoryImpl;
 import service.VideoService;
 import service.VideoServiceImpl;
 import strategy.SearchStrategy;
-import strategy.TitleSearchStrategy;
+import strategy.SearchStrategyImpl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,8 +15,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        VideoService videoService = new VideoServiceImpl(new FileVideoRepository("videos.txt"));
-        SearchStrategy searchStrategy = new TitleSearchStrategy();
+        VideoService videoService = new VideoServiceImpl(new VideoRepositoryImpl("videos.txt"));
+        SearchStrategy searchStrategy = new SearchStrategyImpl();
 
         while (true) {
             System.out.println("\n=== Sistema de Gerenciamento de Vídeos ===");
