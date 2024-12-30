@@ -1,6 +1,7 @@
 package repository;
 
 import model.Video;
+import utills.VideoConverter;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -16,10 +17,10 @@ public class VideoRepositoryImpl implements VideoRepository {
     @Override
     public void save(Video video) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
-            bw.write(video.toString());
+            bw.write(VideoConverter.toString(video));
             bw.newLine();
         } catch (IOException e) {
-            // Ignorar erros por enquanto
+            throw new RuntimeException("erro ao salvar o vídeo no arquivo: " + e.getMessage(), e);
         }
     }
 
@@ -29,13 +30,13 @@ public class VideoRepositoryImpl implements VideoRepository {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                Video video = Video.fromString(line);
+                Video video = VideoConverter.fromString(line);
                 if (video != null) {
                     videos.add(video);
                 }
             }
         } catch (IOException e) {
-            // Ignorar erros por enquanto
+            throw new RuntimeException("Erro ao ler o arquivo: " + e.getMessage(), e);
         }
         return videos;
     }
