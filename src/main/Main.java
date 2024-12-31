@@ -6,6 +6,7 @@ import service.VideoService;
 import service.VideoServiceImpl;
 import strategy.SearchStrategy;
 import strategy.SearchStrategyImpl;
+import utills.Categoria;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,8 +46,18 @@ public class Main {
         System.out.print("Digite a duração do vídeo (em minutos): ");
         int duracao = scanner.nextInt();
         scanner.nextLine(); // Consumir a quebra de linha
-        System.out.print("Digite a categoria do vídeo: ");
-        String categoria = scanner.nextLine();
+
+        System.out.print("Digite a categoria do vídeo (EDUCACAO,ENTRETENIMENTO,COMEDIA,AVENTURA,OUTRO): ");
+        String categoriaStr = scanner.nextLine().toUpperCase();
+
+        Categoria categoria;
+        try {
+            categoria = Categoria.valueOf(categoriaStr);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Categoria inválida, digite uma disponivel");
+            return;
+        }
+
         System.out.print("Digite a data de publicação (dd/MM/yyyy): ");
         String dataStr = scanner.nextLine();
 
