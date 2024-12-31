@@ -18,7 +18,7 @@ public class VideoConverter {
             String titulo = partes[0];
             String descricao = partes[1];
             int duracao = Integer.parseInt(partes[2]);
-            String categoria = partes[3];
+            Categoria categoria = Categoria.valueOf(partes[3]);
             Date dataPublicacao = new SimpleDateFormat("dd/MM/yyyy").parse(partes[4]);
 
             return new Video(titulo, descricao, duracao, categoria, dataPublicacao);
@@ -39,7 +39,7 @@ public class VideoConverter {
                 video.getTitulo(),
                 video.getDescricao(),
                 String.valueOf(video.getDuracao()),
-                video.getCategoria(),
+                video.getCategoria().name(),
                 sdf.format(video.getDataPublicacao())
         );
 
