@@ -2,7 +2,7 @@ package utills;
 
 public enum Categoria {
     EDUCACAO,
-    ENTRETENIMENTO,
+    ENTRETERIMENTO,
     COMEDIA,
     AVENTURA,
     OUTRO
